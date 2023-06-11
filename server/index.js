@@ -10,7 +10,7 @@ app.use(express.json())
 // const { getFortune } = require('./controller') we can write this:
 const { getCompliment,
         getFortune,
-        getQuotes
+        getQuotes,
         } = require('./controller')
 
 // End Points:        

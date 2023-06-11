@@ -2,22 +2,27 @@
 
 const inspiringQuotes = [
     {
+        quoteId: 1,
         quote: "A beautiful, smart, and loving person will be coming into your life.",
         likes: 0
     },
     {
+        quoteId: 2,
         quote: "A light heart carries you through all the hard times.",
         likes: 0
     },
     {
+        quoteId: 3,
         quote: "Embrace this love relationship you have!",
         likes: 0
     },
     {
+        quoteId: 4,
         quote: "Have a beautiful day.",
         likes: 0
     },
     {
+        quoteId: 5,
         quote: "Welcome change.",
         likes: 0
     }
