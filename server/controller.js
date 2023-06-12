@@ -68,5 +68,12 @@ module.exports = {
         let { index } = req.params
         inspiringQuotes.splice(index,1)
         res.status(200).send(inspiringQuotes)
+    },
+    addLikes: (req, res) => {
+        let { index } = req.params
+        index = parseInt(index)
+        inspiringQuotes[index].likes = inspiringQuotes[likes]++
+        res.status(200).send(inspiringQuotes)
     }
+
 }

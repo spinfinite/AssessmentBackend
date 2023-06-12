@@ -12,7 +12,8 @@ const { getCompliment,
         getFortune,
         getQuotes,
         addQuote,
-        deleteQuote
+        deleteQuote,
+        addLikes
 } = require('./controller')
 
 // End Points:        
@@ -25,5 +26,7 @@ app.get("/api/quotes", getQuotes)
 app.post("/api/quotes", addQuote)
 
 app.delete("/api/quotes:index",deleteQuote)
+
+app.put("api/quotes:index", addLikes)
 
 app.listen(4000, () => console.log("Server running on 4000"))

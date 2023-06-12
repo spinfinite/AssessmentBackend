@@ -1,10 +1,11 @@
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.getElementById("fortuneButton")
 const quoteBtn = document.getElementById("getQuotesButton")
-const quoteList = document.querySelector('ul')
-const form = document.querySelector('form')
-const input = document.querySelector('input')
+const quoteList = document.querySelector("ul")
+const form = document.querySelector("form")
+const input = document.querySelector("input")
 const deleteBtn = document.querySelector("deleteButton")
+
 
 
 const displayQuotes = (quotesArr) => {
@@ -15,19 +16,25 @@ const displayQuotes = (quotesArr) => {
 
         let listQuote = document.createElement('li') // create a list element
         let quoteName = document.createElement('span') // create a span element
-        let deleteBtn = document.createElement('button')
+        let deleteBtn = document.createElement('deleteButton')
+        let likesBtn = document.createElement('likesButton')
 
-        quoteName.textContent = `${quote}  Likes:   ${likes}`
+        quoteName.textContent = `Quote ${index + 1}: ${quote}  Likes: ${likes} `
 
         quoteName.id = index
         quoteName.addEventListener('click', addQuote)
 
+        likesBtn.textContent = likes
+        likesBtn.id = likes++
+        likesBtn.addEventListener('click', addLikes)
+
         deleteBtn.id = index
-        deleteBtn.addEventListener('click', deleteQuote)
+        deleteBtn.removeEventListener('click', deleteQuote)
 
         listQuote.appendChild(quoteName)
         listQuote.appendChild(deleteBtn)
         quoteList.appendChild(listQuote)
+        listQuote.appendChild(likesBtn)
 
     })
 
@@ -65,7 +72,7 @@ const addQuote = (evt) => {
     evt.preventDefault()
     let bodyObj = {
         quote: input.value,
-        likes: 5
+        likes: 0
     }
     axios.post(`http://localhost:4000/api/quotes/`, bodyObj)
         .then(response => {
@@ -84,23 +91,24 @@ const deleteQuote = evt => {
         .catch(err => console.log(err))
 }
 
-// const addLikes = () => {
-//     axios.get(`http://localhost:4000/api/quotes/`)
-//         .then(res => {
-//             // assign the Object to a constant
-//             const data = res.data
-//             console.log(data) // test the constant by consoling out
-//             displayQuotes(res.data) // call the displayQuotes function
-//      })
-//     .catch(err => console.log(err))
+const addLikes = () => {
+    axios.get(`http://localhost:4000/api/quotes/${evt.target.id}`)
+        .then(res => {
+            // assign the Object to a constant
+            const data = res.data
+            console.log(data) // test the constant by consoling out
+            displayQuotes(res.data) // call the displayQuotes function
+     })
+    .catch(err => console.log(err))
 
-// }
+}
 
 
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
 quoteBtn.addEventListener('click',getQuotes)
 form.addEventListener('submit', addQuote)
-form.addEventListener('submit', deleteQuote)
+form.removeEventListener('submit', deleteQuote)
+form.addEventListener('click',addLikes)
 getQuotes()
 //getQuotes()
