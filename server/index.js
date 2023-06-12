@@ -11,7 +11,9 @@ app.use(express.json())
 const { getCompliment,
         getFortune,
         getQuotes,
-        } = require('./controller')
+        addQuote,
+        deleteQuote
+} = require('./controller')
 
 // End Points:        
 app.get("/api/compliment", getCompliment)
@@ -19,5 +21,9 @@ app.get("/api/compliment", getCompliment)
 app.get("/api/fortune", getFortune)
 
 app.get("/api/quotes", getQuotes)
+
+app.post("/api/quotes", addQuote)
+
+app.delete("/api/quotes:index",deleteQuote)
 
 app.listen(4000, () => console.log("Server running on 4000"))
